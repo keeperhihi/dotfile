@@ -1,0 +1,16 @@
+# 秘密与运行时状态。
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.zwc
+.zcompdump*
+.zhistory
+.zsh_history
+*.swp
+*.swo
+*~
+.DS_Store

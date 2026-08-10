@@ -1,0 +1,9 @@
+{{- $manifest := include "shell/zsh/manifest.toml" | fromToml -}}
+# 由 ~/Workspace/dotfile 生成；请编辑 shell/zsh，不要直接修改本文件。
+
+{{ range $manifest.profile.modules -}}
+{{ include (printf "shell/zsh/lib/%s.zsh" .) }}
+{{ end -}}
+{{ range $manifest.profile.plugins -}}
+{{ include (printf "shell/zsh/plugins/%s/profile.zsh" .) }}
+{{ end -}}

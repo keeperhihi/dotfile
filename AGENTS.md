@@ -1,0 +1,6 @@
+- 忽略文件：编写时检查 `.chezmoiignore` 与 `.gitignore`，并保持它们与新增运行时文件同步。
+- 备份脚本：编写时检查 `scripts/restore-dotfiles.zsh` 与 `scripts/backup-dotfiles.zsh`；受管目标统一维护在 `scripts/managed-targets.zsh`。
+- 兼容性：外部命令同时考虑 macOS BSD 与 Linux GNU 语法；不要把 `--` 当成所有外部命令都支持的参数结束符。
+- 架构：日常维护内容只放在 `shell/zsh`；chezmoi 只通过仓库根部元文件和 target adapter 负责部署。
+- 命名：目录名不用下划线；使用语义名，不用序号表达加载顺序，顺序统一写在 `shell/zsh/manifest.toml`。
+- 最终态：不保留兼容 shim、迁移文件或旧目录跳转；变更必须先在临时 HOME 中验证。

@@ -1,0 +1,11 @@
+# 这里只声明装配顺序；具体实现分别位于 lib、plugins 和 themes。
+
+[profile]
+modules = ["environment"]
+plugins = ["homebrew", "nvm"]
+
+[interactive]
+before = ["environment"]
+plugins = ["zim", "nvm", "proxy"]
+after = ["history", "options", "keybindings", "aliases", "functions", "listing"]
+theme = "personal"
