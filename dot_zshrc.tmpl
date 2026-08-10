@@ -1,14 +1,6 @@
 {{- $manifest := include "shell/zsh/manifest.toml" | fromToml -}}
 # 由 ~/Workspace/dotfile 生成；请编辑 shell/zsh，不要直接修改本文件。
 
-{{ include "shell/zsh/settings.zsh" }}
-{{ range $manifest.interactive.before -}}
-{{ include (printf "shell/zsh/lib/%s.zsh" .) }}
+{{ range $manifest.interactive.sources -}}
+{{ include (printf "shell/zsh/%s" .) }}
 {{ end -}}
-{{ range $manifest.interactive.plugins -}}
-{{ include (printf "shell/zsh/plugins/%s/init.zsh" .) }}
-{{ end -}}
-{{ range $manifest.interactive.after -}}
-{{ include (printf "shell/zsh/lib/%s.zsh" .) }}
-{{ end -}}
-{{ include (printf "shell/zsh/themes/%s.zsh" $manifest.interactive.theme) }}

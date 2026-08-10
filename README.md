@@ -22,7 +22,7 @@
 
 `shell/zsh` 是唯一需要日常维护的领域目录：
 
-- `manifest.toml` 声明 profile、交互式模块、插件和主题的装配顺序。
+- `manifest.toml` 按 profile 和 interactive 两个启动阶段声明完整装配顺序。
 - `settings.zsh` 保存少量跨模块的用户参数。
 - `lib` 保存 Zsh 自身行为，例如环境、历史、按键、alias 和 functions。
 - `plugins` 保存依赖外部框架或应用的初始化与补全。
@@ -43,20 +43,36 @@ target adapter，把上述源码生成成自包含的 `~/.zprofile`、`~/.zshrc`
 
 ```toml
 [profile]
-modules = ["environment"]
-plugins = ["homebrew", "nvm"]
+sources = [
+  "lib/environment.zsh",
+  "plugins/homebrew/profile.zsh",
+  "plugins/nvm/profile.zsh",
+]
 
 [interactive]
-before = ["environment"]
-plugins = ["zim", "nvm", "proxy"]
-after = ["history", "options", "keybindings", "aliases", "functions", "listing"]
-theme = "personal"
+sources = [
+  "settings.zsh",
+  "lib/environment.zsh",
+  "plugins/zim/interactive.zsh",
+  "plugins/nvm/interactive.zsh",
+  "plugins/proxy/interactive.zsh",
+  "lib/history.zsh",
+  "lib/options.zsh",
+  "lib/keybindings.zsh",
+  "lib/aliases.zsh",
+  "lib/functions.zsh",
+  "lib/listing.zsh",
+  "themes/personal.zsh",
+]
 ```
+
+`profile.sources` 生成 `~/.zprofile`，`interactive.sources` 生成
+`~/.zshrc`。数组顺序就是最终加载顺序，没有隐含的 before/after 分组。
 
 插件约定：
 
 - `plugins/<name>/profile.zsh` 在登录阶段装配。
-- `plugins/<name>/init.zsh` 在交互阶段装配。
+- `plugins/<name>/interactive.zsh` 在交互阶段装配。
 - `plugins/<name>` 可以保存该应用的补全生成逻辑。
 - 插件会被直接编译进生成的 dotfile，因此入口顶层不能使用 `return`；缺少命令
   时使用条件块包住实现。
@@ -94,7 +110,7 @@ exec zsh -l
 - alias：`shell/zsh/lib/aliases.zsh`
 - functions：`shell/zsh/lib/functions.zsh`
 - 历史和按键：`shell/zsh/lib/history.zsh`、`shell/zsh/lib/keybindings.zsh`
-- 应用初始化或补全：`shell/zsh/plugins/<name>/init.zsh`
+- 应用初始化或补全：`shell/zsh/plugins/<name>/interactive.zsh`
 
 ## 备份与恢复
 

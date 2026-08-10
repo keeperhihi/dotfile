@@ -1,11 +1,24 @@
-# 这里只声明装配顺序；具体实现分别位于 lib、plugins 和 themes。
+# 按 Zsh 启动阶段声明完整、唯一的装配顺序。
 
 [profile]
-modules = ["environment"]
-plugins = ["homebrew", "nvm"]
+sources = [
+  "lib/environment.zsh",
+  "plugins/homebrew/profile.zsh",
+  "plugins/nvm/profile.zsh",
+]
 
 [interactive]
-before = ["environment"]
-plugins = ["zim", "nvm", "proxy"]
-after = ["history", "options", "keybindings", "aliases", "functions", "listing"]
-theme = "personal"
+sources = [
+  "settings.zsh",
+  "lib/environment.zsh",
+  "plugins/zim/interactive.zsh",
+  "plugins/nvm/interactive.zsh",
+  "plugins/proxy/interactive.zsh",
+  "lib/history.zsh",
+  "lib/options.zsh",
+  "lib/keybindings.zsh",
+  "lib/aliases.zsh",
+  "lib/functions.zsh",
+  "lib/listing.zsh",
+  "themes/personal.zsh",
+]
