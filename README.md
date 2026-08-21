@@ -22,6 +22,7 @@
 └── scripts/
     ├── apply-dotfiles.zsh
     ├── backup-dotfiles.zsh
+    ├── publish-dotfiles.zsh
     ├── restore-dotfiles.zsh
     ├── dotfiles-common.zsh
     └── managed-targets.zsh
@@ -114,6 +115,18 @@ shared → 当前平台 fragment → private（存在时）
 Homebrew、`pmset` 等 macOS 内容只在 `platform/darwin/` 加载；Linux 不会加载这些片段，
 也不会凭空创建不存在的 Linux 配置。代理地址、远端连接信息、网关 token 和本机管理命令
 只放在 ignored `private/zsh/`。
+
+### 快速提交并推送
+
+本机先使用 `gh auth login` 登录 GitHub，然后在仓库的 `main` branch 上执行：
+
+```zsh
+zsh scripts/publish-dotfiles.zsh
+```
+
+脚本等价于对本仓库执行 `git add .`、使用固定消息 `[updated] dotfiles` 创建
+commit，再推送到 `origin main`。没有修改时会直接退出；`private/` 继续由 Git ignore，
+不会进入 commit。脚本不会自动 pull、rebase 或 force push，远端存在新提交时会正常拒绝推送。
 
 ### Vim Option 键
 
