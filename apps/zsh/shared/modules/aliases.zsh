@@ -1,7 +1,8 @@
 # ==============================================================================
-# 个人 alias
+# 共享 alias
 # ==============================================================================
 
-alias zzz='pmset displaysleepnow'
 alias mosh='mosh -4 -p 60000:60020'
 alias rsy='rsync -avz --progress --exclude "" -e "ssh -p 22"'
+alias tl='tmux ls'
+alias ta='tmux attach -t'

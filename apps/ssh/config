@@ -1,0 +1,5 @@
+# 跨设备共享的 SSH 默认行为。
+Host *
+    ServerAliveInterval 30
+    ServerAliveCountMax 100
+    TCPKeepAlive yes

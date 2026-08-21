@@ -1,0 +1,3 @@
+# 跨设备共享的 Git 行为；身份、代理等机器字段在 ignored private/git/gitconfig。
+[http]
+	version = HTTP/1.1

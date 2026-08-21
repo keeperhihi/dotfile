@@ -1,0 +1,63 @@
+" iTerm2 将这些 Option 组合键发送为 Esc 前缀序列。
+" Vim 会先检查原始映射，再解析终端按键码；直接映射可兼容 modifyOtherKeys。
+set timeout
+set timeoutlen=1000
+set ttimeout
+set ttimeoutlen=1000
+
+" ============================================================================
+" Insert 模式
+" ============================================================================
+
+" Option + Backspace：删除光标前一个词。
+inoremap <Esc><Char-127> <C-W>
+
+" Option + Fn + Backspace：删除光标后的词。
+inoremap <Esc>d <C-O>dw
+
+" Option + Left / Right：按词移动。
+function! s:MoveInsertWordLeft() abort
+  normal! b
+endfunction
+
+function! s:MoveInsertWordRight() abort
+  normal! w
+endfunction
+
+inoremap <Esc>b <Cmd>call <SID>MoveInsertWordLeft()<CR>
+inoremap <Esc>f <Cmd>call <SID>MoveInsertWordRight()<CR>
+
+" ============================================================================
+" 命令行模式（:、/、?）
+" ============================================================================
+
+cnoremap <Esc><Char-127> <C-W>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+
+" 命令行模式没有内置的“向前删除一个词”，因此保留光标前的内容，
+" 删除当前词剩余部分，或删除空白后的下一个非空白词。
+function! s:DeleteCmdlineWordForward() abort
+  let l:line = getcmdline()
+  let l:cursor = getcmdpos() - 1
+  let l:head = strpart(l:line, 0, l:cursor)
+  let l:tail = strpart(l:line, l:cursor)
+
+  if l:tail =~# '^\s'
+    let l:tail = substitute(
+          \ l:tail,
+          \ '^\s*\%(\S\+\)\?',
+          \ '',
+          \ ''
+          \ )
+  elseif l:head =~# '\S$'
+    let l:tail = substitute(l:tail, '^\S\+', '', '')
+  else
+    let l:tail = substitute(l:tail, '^\S\+\s*', '', '')
+  endif
+
+  call setcmdpos(l:cursor + 1)
+  return l:head . l:tail
+endfunction
+
+cnoremap <Esc>d <C-\>e<SID>DeleteCmdlineWordForward()<CR>

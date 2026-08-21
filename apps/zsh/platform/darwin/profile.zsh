@@ -1,4 +1,4 @@
-# Homebrew 登录环境。
+# macOS 登录环境：Homebrew 仅在本机存在时加载。
 
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv zsh)"

@@ -1,4 +1,4 @@
-# Zim 模块清单；该文件生成标准的 ~/.zimrc。
+# Zim 模块清单；由 scripts/apply-dotfiles.zsh 直接生成 ~/.zimrc。
 
 zmodule environment
 zmodule git

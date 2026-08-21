@@ -1,0 +1,43 @@
+# Zsh 的唯一装配清单；数组顺序就是生成目标中的实际加载顺序。
+# shared 先加载，匹配当前平台的 fragment 随后加载，private 最后加载。
+
+[profile]
+shared = [
+  "shared/modules/environment.zsh",
+  "shared/profile/nvm.zsh",
+]
+darwin = [
+  "platform/darwin/profile.zsh",
+]
+linux = [
+  "platform/linux/profile.zsh",
+]
+private = [
+  "environment.zsh",
+  "profile.zsh",
+]
+
+[interactive]
+shared = [
+  "shared/interactive/settings.zsh",
+  "shared/modules/environment.zsh",
+  "shared/interactive/zim.zsh",
+  "shared/interactive/nvm.zsh",
+  "shared/modules/history.zsh",
+  "shared/modules/options.zsh",
+  "shared/modules/keybindings.zsh",
+  "shared/modules/aliases.zsh",
+  "shared/modules/functions.zsh",
+  "shared/modules/listing.zsh",
+  "shared/interactive/theme.zsh",
+]
+darwin = [
+  "platform/darwin/interactive.zsh",
+]
+linux = [
+  "platform/linux/interactive.zsh",
+]
+private = [
+  "environment.zsh",
+  "interactive.zsh",
+]

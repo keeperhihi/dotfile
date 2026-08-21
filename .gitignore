@@ -1,4 +1,22 @@
-# 秘密与运行时状态。
+# 本机私有源码：永远不进入 Git。
+private/
+
+# 应用凭据与运行时状态。
+.config/gh/hosts.yml
+.config/gh/hosts.yml.*
+.git-credentials
+.gitconfig.lock
+.ssh/known_hosts
+.ssh/known_hosts.old
+.viminfo
+.viminfo.tmp
+.net?rwhist
+*.viminfo
+*.swp
+*.swo
+*~
+
+# Secrets and local key material.
 .env
 .env.*
 !.env.example
@@ -6,11 +24,31 @@
 *.key
 *.p12
 *.pfx
+
+# Shell/application caches and generated state.
+.cache/
+.zim/
 *.zwc
 .zcompdump*
 .zhistory
 .zsh_history
-*.swp
-*.swo
-*~
+.npm/_cacache/
+.npm/_logs/
 .DS_Store
+Thumbs.db
+.dotfiles.*
+.local/state/dotfiles-backups/
+
+# Generated targets when a temporary HOME happens to be the repository root.
+/.zshrc
+/.zprofile
+/.zimrc
+/.vimrc
+/.gitconfig
+/.npmrc
+/.ssh/config
+/.config/gh/config.yml
+
+# Backups accidentally created inside the repository.
+dotfiles-*.tar.gz
+dotfiles-*.tar.gz.sha256
