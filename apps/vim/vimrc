@@ -5,6 +5,9 @@ set timeoutlen=1000
 set ttimeout
 set ttimeoutlen=1000
 
+" Normal 模式允许光标停在行尾字符之后，与 Insert 模式的最后一个位置保持一致。
+set virtualedit=onemore
+
 " ============================================================================
 " Insert 模式
 " ============================================================================
@@ -26,6 +29,21 @@ endfunction
 
 inoremap <Esc>b <Cmd>call <SID>MoveInsertWordLeft()<CR>
 inoremap <Esc>f <Cmd>call <SID>MoveInsertWordRight()<CR>
+
+" ============================================================================
+" Normal 模式
+" ============================================================================
+
+" 退出 Insert 模式后，Option 组合键仍然使用 Esc 前缀序列。
+" Option + Left / Right：按词向左或向右移动。
+nnoremap <Esc>b b
+nnoremap <Esc>f w
+
+" Option + Backspace：删除光标前的词。
+nnoremap <Esc><Char-127> db
+
+" Option + Fn + Backspace：删除光标后的词。
+nnoremap <Esc>d dw
 
 " ============================================================================
 " 命令行模式（:、/、?）

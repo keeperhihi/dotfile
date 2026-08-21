@@ -16,7 +16,7 @@ private/
 *.swo
 *~
 
-# Secrets and local key material.
+# 本机密钥与敏感材料。
 .env
 .env.*
 !.env.example
@@ -25,7 +25,7 @@ private/
 *.p12
 *.pfx
 
-# Shell/application caches and generated state.
+# Shell 与应用缓存及生成状态。
 .cache/
 .zim/
 *.zwc
@@ -39,7 +39,7 @@ Thumbs.db
 .dotfiles.*
 .local/state/dotfiles-backups/
 
-# Generated targets when a temporary HOME happens to be the repository root.
+# 临时 HOME 位于仓库根目录时生成的目标。
 /.zshrc
 /.zprofile
 /.zimrc
@@ -49,6 +49,6 @@ Thumbs.db
 /.ssh/config
 /.config/gh/config.yml
 
-# Backups accidentally created inside the repository.
+# 仓库内意外生成的备份。
 dotfiles-*.tar.gz
 dotfiles-*.tar.gz.sha256

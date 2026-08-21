@@ -1,27 +1,27 @@
-# The current version of the config schema
+# 当前 config schema 的版本。
 version: 1
-# What protocol to use when performing git operations. Supported values: ssh, https
+# 执行 Git 操作时使用的协议；支持 ssh 和 https。
 git_protocol: https
-# What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
+# gh 创建 issue、pull request 等内容时使用的 editor；留空则使用环境设置。
 editor:
-# When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+# 何时显示交互式 prompt；这是全局配置，不能按 hostname 覆盖。
 prompt: enabled
-# Preference for editor-based interactive prompting. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+# 基于 editor 的交互式 prompt 偏好；这是全局配置，不能按 hostname 覆盖。
 prefer_editor_prompt: disabled
-# A pager program to send command output to, e.g. "less". If blank, will refer to environment. Set the value to "cat" to disable the pager.
+# 命令输出使用的 pager，例如 "less"；留空则使用环境设置，设为 "cat" 可禁用 pager。
 pager:
-# Aliases allow you to create nicknames for gh commands
+# alias 用于为 gh 命令创建简称。
 aliases:
     co: pr checkout
-# The path to a unix socket through which to send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
+# 发送 HTTP 连接时使用的 Unix socket 路径；留空则由 net/http.DefaultTransport 处理。
 http_unix_socket:
-# What web browser gh should use when opening URLs. If blank, will refer to environment.
+# gh 打开 URL 时使用的 browser；留空则使用环境设置。
 browser:
-# Whether to display labels using their RGB hex color codes in terminals that support truecolor. Supported values: enabled, disabled
+# 是否在支持 truecolor 的终端中使用 RGB 十六进制颜色显示 label。
 color_labels: disabled
-# Whether customizable, 4-bit accessible colors should be used. Supported values: enabled, disabled
+# 是否使用可自定义的 4-bit accessible colors。
 accessible_colors: disabled
-# Whether an accessible prompter should be used. Supported values: enabled, disabled
+# 是否使用 accessible prompter。
 accessible_prompter: disabled
-# Whether to use an animated spinner as a progress indicator. If disabled, a textual progress indicator is used instead. Supported values: enabled, disabled
+# 是否使用动画 spinner 显示进度；禁用后改用文字进度提示。
 spinner: enabled

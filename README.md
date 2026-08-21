@@ -117,8 +117,9 @@ Homebrew、`pmset` 等 macOS 内容只在 `platform/darwin/` 加载；Linux 不�
 
 ### Vim Option 键
 
-`apps/vim/vimrc` 保留经过真实 Esc 前缀序列验证的 Insert 模式映射：Option+Left/Right、
-Option+Backspace、Option+Fn+Backspace。`private/vim/vimrc` 只用于本机覆盖。
+`apps/vim/vimrc` 保留经过真实 Esc 前缀序列验证的映射：在 Insert 和 Normal 模式下，
+Option+Left/Right、Option+Backspace、Option+Fn+Backspace 都可用。`private/vim/vimrc`
+只用于本机覆盖。
 
 ## 备份与恢复
 

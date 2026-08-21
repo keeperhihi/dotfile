@@ -1,8 +1,8 @@
 #!/usr/bin/env zsh
 
-# Shared, dependency-free helpers for the dotfiles scripts.
-# This file is sourced by the scripts in this directory; it is not a target
-# configuration and never becomes part of a generated HOME file.
+# 供 dotfiles 脚本共用的无依赖辅助函数。
+# 本文件由当前目录中的脚本加载；它不是部署目标，
+# 也不会成为生成 HOME 文件的一部分。
 
 dotfiles_die() {
   print -u2 -- "错误：$*"
