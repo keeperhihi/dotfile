@@ -50,8 +50,8 @@
 5. 生成目标的权限。
 
 当前目标为：`.zshrc`、`.zprofile`、`.zimrc`、`.vimrc`、`.gitconfig`、`.npmrc`、
-`.ssh/config` 和 `.config/gh/config.yml`。不创建当前不存在的目标，也不再维护旧的
-TOML 注册表、根部模板或任何迁移 shim。
+`.ssh/config` 和 `.config/gh/config.yml`。apply 会创建或更新当前平台注册的全部目标；
+也不再维护旧的 TOML 注册表、根部模板或任何迁移 shim。
 
 查看当前平台解析出的目标列表：
 
@@ -96,7 +96,7 @@ zsh scripts/apply-dotfiles.zsh \
 ```
 
 写入前脚本会把所有目标渲染到临时 staging，再逐个在目标父目录中使用临时文件和 `mv`
-原子替换；父目录如果是符号链接会拒绝写入。`--check` 同时检查注册表声明的权限：含有
+原子替换；不存在的目标会被创建，父目录如果是符号链接会拒绝写入。`--check` 同时检查注册表声明的权限：含有
 本机私有内容的 `.zshrc`、`.zprofile`、`.gitconfig`、`.npmrc` 和 SSH 配置默认是 `600`。
 
 ### Zsh 装配顺序和平台边界
@@ -113,7 +113,7 @@ shared → 当前平台 fragment → private（存在时）
 自动 promote，也不保留重复兼容层。
 
 Homebrew、`pmset` 等 macOS 内容只在 `platform/darwin/` 加载；Linux 不会加载这些片段，
-也不会凭空创建不存在的 Linux 配置。代理地址、远端连接信息、网关 token 和本机管理命令
+但仍会创建注册表中的 Linux 目标。代理地址、远端连接信息、网关 token 和本机管理命令
 只放在 ignored `private/zsh/`。
 
 ### 快速提交并推送
