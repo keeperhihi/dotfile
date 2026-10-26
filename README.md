@@ -19,6 +19,7 @@
 │   └── gh/config.yml
 ├── private/
 │   └── {zsh,vim,git,npm,ssh}/
+├── tests/apply-dotfiles.zsh
 └── scripts/
     ├── apply-dotfiles.zsh
     ├── backup-dotfiles.zsh
@@ -99,6 +100,9 @@ zsh scripts/apply-dotfiles.zsh \
 原子替换；不存在的目标会被创建，父目录如果是符号链接会拒绝写入。`--check` 同时检查注册表声明的权限：含有
 本机私有内容的 `.zshrc`、`.zprofile`、`.gitconfig`、`.npmrc` 和 SSH 配置默认是 `600`。
 
+SSH 按 `private/ssh/config`（存在时）→ `apps/ssh/config` 拼接。OpenSSH 的多数选项
+采用先出现的值，因此私有主机配置优先，共享的 `Host *` 为未指定的选项提供默认值。
+
 ### Zsh 装配顺序和平台边界
 
 `apps/zsh/manifest.toml` 是 Zsh 的唯一加载顺序来源。对 `.zprofile` 和 `.zshrc`，脚本
@@ -174,6 +178,12 @@ zsh scripts/restore-dotfiles.zsh --yes \
 新格式备份作为回退点。
 
 ## 临时 HOME 验证
+
+运行 `--diff` 只读行为与 SSH 配置优先级的回归测试；脚本会自动创建并清理临时 source/HOME：
+
+```zsh
+zsh tests/apply-dotfiles.zsh
+```
 
 任何真实 HOME 变更前，建议使用临时 source/HOME：
 

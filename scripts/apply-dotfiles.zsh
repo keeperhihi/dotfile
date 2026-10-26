@@ -19,7 +19,7 @@ usage() {
   print -u2 -- "用法：$script_name [选项]"
   print -u2 -- "  --dry-run             只渲染并显示将要写入的目标"
   print -u2 -- "  --check               检查 HOME 是否与渲染结果一致，不写入"
-  print -u2 -- "  --diff                显示渲染结果与 HOME 的 unified diff"
+  print -u2 -- "  --diff                显示渲染结果与 HOME 的 unified diff，不写入 HOME"
   print -u2 -- "  --platform darwin|linux  覆盖平台检测"
   print -u2 -- "  --home PATH           覆盖目标 HOME"
   print -u2 -- "  --source PATH         覆盖仓库源码目录"
@@ -170,9 +170,15 @@ render_plain_target() {
 
   print -r -- "$comment" >> "$output"
   print -r >> "$output"
-  dotfiles_append_fragment "$shared_path" "$output"
+  # SSH 优先采用先出现的值，私有配置必须放在共享默认值之前。
+  if [[ "$renderer" != ssh_config ]]; then
+    dotfiles_append_fragment "$shared_path" "$output"
+  fi
   if [[ -n "${private_path:-}" && ( -e "$private_path" || -L "$private_path" ) ]]; then
     dotfiles_append_fragment "$private_path" "$output"
+  fi
+  if [[ "$renderer" == ssh_config ]]; then
+    dotfiles_append_fragment "$shared_path" "$output"
   fi
 }
 
@@ -286,6 +292,10 @@ fi
 
 if (( dry_run )); then
   print -- "dry-run：未写入 HOME（$mismatches 个目标需要变更）。"
+  exit 0
+fi
+
+if (( show_diff )); then
   exit 0
 fi
 
